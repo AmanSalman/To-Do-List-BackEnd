@@ -1,0 +1,32 @@
+import { Tasks } from "../../../DB/models/Tasks.model.js";
+import { User } from "../../../DB/models/User.model.js";
+
+export const GetUserTasks = async (req, res, next) => {
+  const user = await User.findById(req.user._id)
+  if(!user.tasks) return res.status(404).json({message:'No tasks found'})
+  return res.status(200).json({message:'success', tasks:user.tasks})
+}
+
+
+export const create = async (req,res,next) =>{
+  const saveTask = new Tasks(req.body)
+  await saveTask.save()
+  const user = await User.findById(req.user._id)
+  user.tasks.push(saveTask._id)
+  await user.save()
+  return res.status(201).json({message:"success", task:saveTask})
+}
+
+
+export const update = async (req, res, next) => {
+  const task = await Tasks.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  if(!task) return res.status(404).json({message:'Task not found'})
+  return res.status(200).json({message:'success', task})
+}
+
+
+export const remove = async (req,res,next)=>{
+  const task = await Tasks.findByIdAndDelete(req.params.id)
+  if(!task) return res.status(404).json({message:'Task not found'})
+  return res.status(200).json({message:'success', task})
+}
