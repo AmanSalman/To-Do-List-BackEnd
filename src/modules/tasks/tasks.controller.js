@@ -30,3 +30,11 @@ export const remove = async (req,res,next)=>{
   if(!task) return res.status(404).json({message:'Task not found'})
   return res.status(200).json({message:'success', task})
 }
+
+
+export const getTask = async (req,res,next) =>{
+  const {id} = req.params
+  const task = await Tasks.findById(id)
+  if(!task) return res.status(404).json({message:'Task not found'})
+  return res.status(200).json({message:'success', task})
+}

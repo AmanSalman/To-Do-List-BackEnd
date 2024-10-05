@@ -8,6 +8,7 @@ router.post('/',auth(), controller.create)
 router.get('/',auth(), controller.GetUserTasks)
 router.patch('/:id', auth(), controller.update)
 router.delete('/:id', auth(), controller.remove)
+router.get('/:id', auth(), controller.getTask)
 
 
 export default router;
