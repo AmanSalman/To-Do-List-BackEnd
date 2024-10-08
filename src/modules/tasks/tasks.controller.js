@@ -38,3 +38,22 @@ export const getTask = async (req,res,next) =>{
   if(!task) return res.status(404).json({message:'Task not found'})
   return res.status(200).json({message:'success', task})
 }
+
+
+export const changeStatus = async (req,res,next) =>{
+  const {id} = req.params
+  const {status} = req.body
+  const task = await Tasks.findByIdAndUpdate(id, {status:status}, {new : true})
+  if(!task) return res.status(404).json({message:'Task not found'})
+    console.log('Task updated')
+  return res.status(200).json({message:'success', task})
+}
+
+
+export const getTasksByStatus = async(req, res) =>{
+  const {status} = req.body
+  const user = await User.findById(req.user._id)
+  const tasks = user.tasks.filter(task => task.status === status)
+  if(!tasks) return res.status(404).json({message:'No tasks found'})
+  return res.status(200).json({message:'success', tasks})
+}
