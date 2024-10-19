@@ -6,9 +6,7 @@ import cors from 'cors'
 export const Appinit = async (app, express) => {
   await connDB();
   app.use(express.json());
-  app.use(cors({
-    origin: 'http://127.0.0.1:5500', // specify the allowed origin
-  }));
+  app.use(cors());
   app.get("/", (req, res) => {
     return res.status(200).json({ message: "Welcome" });
   });
