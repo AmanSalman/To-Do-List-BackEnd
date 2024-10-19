@@ -70,7 +70,7 @@ export const deleteTask = async (req, res) => {
     
     await user.save(); 
     
-    return res.json(user);
+    return res.json({message:'success'});
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
