@@ -64,7 +64,7 @@ Here’s a list of the available API endpoints:
 - **POST** `/api/tasks`: Create a new task.
 - **GET** `/api/tasks/:id`: Retrieve a single task by ID.
 - **PATCH** `/api/tasks/:id`: Update properties of a task by ID.
-- **PUT** `/api/tasks/:id`: Update the entire task by ID (or status depending on your implementation).
+- **PUT** `/api/tasks/:id`: Update the status task by ID.
 - **DELETE** `/api/tasks/:id`: Delete a task by ID.
 
 ## Example Request
